@@ -1,11 +1,5 @@
-// @ts-ignore
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Component } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
-
-
-
-// @ts-ignore
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -15,10 +9,13 @@ import { DUMMY_USERS } from '../dummy-users';
 })
 
 export class UserComponent {
-  selectedUser = DUMMY_USERS[0];
+  @Input({required: true}) id!: string;
+  @Input({required: true}) name!: string;
+  @Input({required: true}) avatar!: string;
+
+  @Output() select = new EventEmitter<string>();
 
   onSelectedUser(){
-    const randomUser = () => DUMMY_USERS[Math.floor(Math.random() * DUMMY_USERS.length)];
-    this.selectedUser = randomUser();
+    this.select.emit(this.name);
   }
 }
