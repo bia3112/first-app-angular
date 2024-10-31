@@ -4,6 +4,7 @@
     @for (user of users; track user.id){
     <li>
       <app-user
+        [selected]="user.id === selectedUserId"
         [user]="user"
         (select)="onSelectUser($event)"
       ></app-user>
@@ -12,7 +13,9 @@
   </ul>
 
   @if (selectedUser) {
-    <app-tasks [name]="selectedUser.name"></app-tasks>
+    <app-tasks
+      [userId]="selectedUser.id"
+      [name]="selectedUser.name"></app-tasks>
   } @else {
     <p id="fallback">Seleciona o Usuário!</p>
   }

@@ -11,6 +11,7 @@ import {TaskComponent} from './task/task.component';
 })
 export class TasksComponent {
   @Input({required: true}) name! : string;
+  @Input({required: true}) userId! : string;
 
   tasks = [
     {
@@ -37,5 +38,10 @@ export class TasksComponent {
       dueDate: '30/1/2025',
     },
   ];
+
+  get selectedUserTask() {
+    return this.tasks.filter(
+      task => task.userId === this.userId);
+  }
 
 }
